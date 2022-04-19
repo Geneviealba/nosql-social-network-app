@@ -1,10 +1,13 @@
 ## A NoSQL Social Network API App
  
  [![License: MIT](https://img.shields.io/badge/License-MIT-pink.svg)](https://opensource.org/licenses/MIT)
+ 
+## DEMO https://drive.google.com/file/d/15fYAkOXJNfS4foR1vgwqBSNmZrQ0_aEB/view?usp=sharing
 
 ## Description
 In this app, we use MongoDB data and several technologies to build and structure an API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list. We use Express.js for routing, a MongoDB database, and the Mongoose ODM. In addition, we used Insomnia to seed our data. 
 ## GitHub link
+https://github.com/Geneviealba/nosql-social-network-app
 
 ## Table of Contents 
 * [Installation](#installation)
