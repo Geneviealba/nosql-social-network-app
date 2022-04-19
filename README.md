@@ -7,7 +7,7 @@
 ## Description
 In this app, we use MongoDB data and several technologies to build and structure an API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list. We use Express.js for routing, a MongoDB database, and the Mongoose ODM. In addition, we used Insomnia to seed our data. 
 
-[Vist My GitHub](://github.com/Geneviealba/nosql-social-network-app)
+[Vist My GitHub](https://github.com/Geneviealba/nosql-social-network-app)
 
 ## Table of Contents 
 * [Installation](#installation)
