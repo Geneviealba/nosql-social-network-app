@@ -1,7 +1,7 @@
 const { Thought, User } = require("../models");
 
 module.exports = {
-  getThoughts(req, res) {
+  allThoughts(req, res) {
     Thought.find()
       .populate({
         path: "reactions",
@@ -16,7 +16,7 @@ module.exports = {
       });
   },
 
-  getSingleThought(req, res) {
+  thoughtById(req, res) {
     Thought.findOne({ _id: req.params.thoughtId })
       .populate({
         path: "reactions",
@@ -26,7 +26,7 @@ module.exports = {
       .sort({ _id: -1 })
       .then((thoughtData) => {
         if (!thoughtData) {
-          res.status(400).json({ message: "No thoughts found with that id!" });
+          res.status(400).json({ message: "Ther is No thoughts associated with that id!" });
           return;
         }
         res.json(thoughtData);
@@ -42,16 +42,16 @@ module.exports = {
       .then((thoughtData) => {
         return User.findOneAndUpdate(
           { _id: req.body.userId },
-          { $push: { thoughtData: thoughtData._id } },
+          { $addToSet: { thoughtData: thoughtData._id } },
           { new: true }
         );
       })
       .then((thoughtData) =>
         !thoughtData
           ? res.status(404).json({
-              message: "Created Thought, but found no user associated with that ID",
+              message: "Created Thought, but no user associated with that ID",
             })
-          : res.json("New thought Created" )
+          : res.json("YAY! New thought Created" )
       )
       .catch((err) => {
         console.log(err);
@@ -68,7 +68,7 @@ module.exports = {
     )
       .then((thoughtData) =>
         !thoughtData
-          ? res.status(404).json({ message: "No thought with this id!" })
+          ? res.status(404).json({ message: " There is No thought associated with this id!" })
           : res.json(thoughtData)
       )
       .catch((err) => {
@@ -77,11 +77,11 @@ module.exports = {
       });
   },
 
-  deleteThought(req, res) {
+  removeThought(req, res) {
     Thought.findOneAndRemove({ _id: req.params.thoughtId })
       .then((thoughtData) =>
         !thoughtData
-          ? res.status(400).json({ message: "No thought with this id!" })
+          ? res.status(400).json({ message: " There is No thought associated with this id!" })
           : User.findOneAndUpdate(
               { thoughts: req.params.thoughtId },
               { $pull: { thoughts: req.params.thoughtId } },
@@ -107,13 +107,13 @@ module.exports = {
     )
       .then((thoughtData) =>
         !thoughtData
-          ? res.status(404).json({ message: "No thought with this id!" })
+          ? res.status(404).json({ message: "There is No thought associated with this id!" })
           : res.json(thoughtData)
       )
       .catch((err) => res.status(404).json(err));
   },
 
-  removeReaction(req, res) {
+  deleteReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
       { $pull: { reactions: { reactionId: req.params.reactionId } } },
@@ -121,7 +121,7 @@ module.exports = {
     )
       .then((thoughtData) =>
         !thought
-          ? res.status(404).json({ message: "No thought with this id!" })
+          ? res.status(404).json({ message: "There is No thought associated with this id!" })
           : res.json(thoughtData)
       )
       .catch((err) => res.status(500).json(err));

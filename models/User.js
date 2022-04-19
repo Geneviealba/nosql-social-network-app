@@ -11,14 +11,15 @@ const userSchema = new Schema(
     },
     email: {
       type: String,
-      required: [true, 'User email address required'],
+      required: true,
       unique: true,
-      validate: {
-        validator: function (v) {
-            return /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(v);
-        },
-        message: props => `${props.value} is not a valid email address!`
-    },
+      match: [/.+@.+\..+/, 'Enter a valid e-mail address']
+    //   validate: {
+    //     validator: function (v) {
+    //         return [/.+@.+\..+/].test(v);
+    //     },
+    //     message: props => `${props.value} is not a valid email address!`
+    // },
     },
     thoughts: [
       {
